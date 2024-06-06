@@ -3,10 +3,12 @@
 client_id = "19bdea8aab3f3a8e1a7931a5e0de3af1"
 name = "snapshot-app"
 handle = "snapshot-app"
-application_url = "https://example.com/"
+application_url = "https://uganda-parcel-apart-fee.trycloudflare.com"
 embedded = true
 
 [build]
+automatically_update_urls_on_dev = true
+dev_store_url = "quickstart-172ba9c2.myshopify.com"
 include_config_on_deploy = true
 
 [access_scopes]
@@ -14,7 +16,11 @@ include_config_on_deploy = true
 scopes = "write_products"
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [
+  "https://uganda-parcel-apart-fee.trycloudflare.com/auth/callback",
+  "https://uganda-parcel-apart-fee.trycloudflare.com/auth/shopify/callback",
+  "https://uganda-parcel-apart-fee.trycloudflare.com/api/auth/callback"
+]
 
 [webhooks]
 api_version = "2024-04"
