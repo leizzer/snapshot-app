@@ -8,7 +8,6 @@ import {
 import React from 'react';
 
 export function ProductsList({products, isLoading}) {
-  console.log('ProductsList', products);
 
   return (
     <LegacyCard sectioned>
@@ -22,7 +21,7 @@ export function ProductsList({products, isLoading}) {
           resourceName={{singular: 'product', plural: 'products'}}
           items={products}
           renderItem={(item) => {
-            const {shopify_product_id, title, product_type, shopify_created_at} = item;
+            const {shopify_product_id, title, shopify_created_at} = item;
 
             return (
               <ResourceItem

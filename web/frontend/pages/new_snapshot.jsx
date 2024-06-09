@@ -5,7 +5,7 @@ import { TitleBar } from "@shopify/app-bridge-react";
 import { useAppQuery, useAuthenticatedFetch } from "../hooks";
 import { Form, FormLayout, Checkbox, TextField } from '@shopify/polaris';
 
-export default function PageName() {
+export default function NewSnapshotPage() {
   const [snapshot, setSnapshot] = useState({ name: "", products: [] });
   const [isLoading, setIsLoading] = useState(true);
   const fetch = useAuthenticatedFetch();
