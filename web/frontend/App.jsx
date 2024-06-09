@@ -30,7 +30,7 @@ export default function App() {
                 },
               ]}
             />
-            <Routes pages={pages} />
+            <Routes pages={pages}/>
           </QueryProvider>
         </AppBridgeProvider>
       </BrowserRouter>

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 #
 class SnapshotsController < AuthenticatedController
-  before_action :set_snapshot, only: %i[ show edit update destroy ]
-
   # GET /snapshots or /snapshots.json
   def index
     @snapshots = current_shop.snapshots
@@ -10,48 +8,30 @@ class SnapshotsController < AuthenticatedController
 
   # GET /snapshots/1 or /snapshots/1.json
   def show
-    #TODO
+    @snapshot = current_shop.snapshots
+      .includes(:products)
+      .find_by_id(params[:id])
   end
 
   # GET /snapshots/new
   def new
-    @snapshot = Snapshot.new(
-      shop_id: current_shop.id,
+    @snapshot = current_shop.snapshots.new(
       name: DateTime.now.to_s,
       products_attributes: parsed_shopify_products
     )
   end
 
-  # GET /snapshots/1/edit
-  def edit
-    #TODO - I think we dont need it
-  end
-
   # POST /snapshots or /snapshots.json
   def create
-    @snapshot = Snapshot.new(
-      shop_id: current_shop.id,
+    @snapshot = current_shop.snapshots.new(
       name: snapshot_params[:name],
       products_attributes: parsed_shopify_products
     )
 
     if @snapshot.save
-      format.json { render :show, status: :created, url: @snapshot }
+      @snapshot
     else
-      format.json { render json: @snapshot.errors, status: :unprocessable_entity }
-    end
-  end
-
-  # PATCH/PUT /snapshots/1 or /snapshots/1.json
-  def update
-    respond_to do |format|
-      if @snapshot.update(snapshot_params)
-        format.html { redirect_to snapshot_url(@snapshot), notice: "Snapshot was successfully updated." }
-        format.json { render :show, status: :ok, location: @snapshot }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @snapshot.errors, status: :unprocessable_entity }
-      end
+      render json: @snapshot.errors, status: :unprocessable_entity
     end
   end
 

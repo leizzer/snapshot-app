@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   scope path: :api, format: :json do
-    resources :snapshots
+    resources :snapshots, except: [:edit, :update]
     # POST /api/products and GET /api/products/count
     resources :products, only: :create do
       collection do
