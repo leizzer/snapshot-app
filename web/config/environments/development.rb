@@ -10,6 +10,7 @@ Rails.application.configure do
   end << /[-\w.]+\.ngrok\.io/
 
   config.hosts << URI(ENV.fetch("HOST", "")).host if ENV.fetch("HOST", "").present?
+  config.web_console.allowed_ips = %w(::0/0)
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time

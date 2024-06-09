@@ -54,6 +54,7 @@ group :development, :test do
   gem "debug", platforms: [:mri, :mingw, :x64_mingw]
   gem "webmock"
   gem "mocha" # Required for Shopify App tests/stubs
+  gem "dotenv-rails"
 end
 
 group :development do
