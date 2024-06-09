@@ -19,7 +19,7 @@ export function useAuthenticatedFetch() {
   const fetchFunction = authenticatedFetch(app);
 
   return async (uri, options) => {
-    const response = await fetchFunction(uri, options);
+    const response = await fetchFunction(uri, {...options, headers: {"Content-Type": "application/json"}});
     checkHeadersForReauthorization(response.headers, app);
     return response;
   };

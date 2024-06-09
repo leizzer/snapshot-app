@@ -23,8 +23,8 @@ export default function App() {
             <NavigationMenu
               navigationLinks={[
                 {
-                  label: t("NavigationMenu.pageName"),
-                  destination: "/pagename",
+                  label: "New Snapshot",
+                  destination: "/new_snapshot",
                 },
               ]}
             />

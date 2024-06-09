@@ -3,7 +3,7 @@
 client_id = "19bdea8aab3f3a8e1a7931a5e0de3af1"
 name = "snapshot-app"
 handle = "snapshot-app"
-application_url = "https://confirm-glasses-cancel-charm.trycloudflare.com"
+application_url = "https://beside-scores-phrase-compatible.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://confirm-glasses-cancel-charm.trycloudflare.com/auth/callback",
-  "https://confirm-glasses-cancel-charm.trycloudflare.com/auth/shopify/callback",
-  "https://confirm-glasses-cancel-charm.trycloudflare.com/api/auth/callback"
+  "https://beside-scores-phrase-compatible.trycloudflare.com/auth/callback",
+  "https://beside-scores-phrase-compatible.trycloudflare.com/auth/shopify/callback",
+  "https://beside-scores-phrase-compatible.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

@@ -5,5 +5,6 @@ class Snapshot < ApplicationRecord
   has_many :products, dependent: :destroy
 
   validates :name, presence: true
-  validates :created_at, presence: true
+
+  accepts_nested_attributes_for :products
 end

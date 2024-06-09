@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :snapshots, defaults: {format: :json}
   root to: "home#index"
 
   mount ShopifyApp::Engine, at: "/api"
@@ -13,6 +12,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   scope path: :api, format: :json do
+    resources :snapshots
     # POST /api/products and GET /api/products/count
     resources :products, only: :create do
       collection do

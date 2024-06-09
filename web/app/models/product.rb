@@ -1,15 +1,13 @@
 # frozen_string_literal: true
 
-class Product < ActiveRecord
+class Product < ApplicationRecord
   belongs_to :snapshot
 
   validates :title, presence: true
-  validates :price, presence: true
   validates :data, presence: true
   validates :vendor, presence: true
-  validates :product_type, presence: true
-  validates :staus, presence: true
+  validates :status, presence: true
   validates :handle, presence: true
   validates :data, presence: true
-  validates :published_at, presence: true
+  validates :shopify_created_at, presence: true
 end

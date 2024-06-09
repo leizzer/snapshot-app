@@ -17,10 +17,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_08_223927) do
     t.string "title", null: false
     t.string "vendor"
     t.string "product_type"
-    t.string "staus"
+    t.string "status"
     t.string "handle"
     t.json "data", null: false
-    t.datetime "published_at", null: false
+    t.datetime "shopify_created_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["snapshot_id"], name: "index_products_on_snapshot_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_08_223927) do
     t.integer "shop_id", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["shop_id"], name: "index_snapshots_on_shop_id"
   end
 
