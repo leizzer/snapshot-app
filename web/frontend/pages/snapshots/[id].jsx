@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { ProductsList } from "../../components";
-import { Card, Page, Layout, SkeletonBodyText, Text, ResourceList, ResourceItem } from '@shopify/polaris';
+import { Card, Page, Layout, SkeletonBodyText, Text } from '@shopify/polaris';
 import { TitleBar } from "@shopify/app-bridge-react";
-import { useAppQuery } from "../../hooks";
-import { useParams } from 'react-router-dom';
+import { useAppQuery, useAuthenticatedFetch } from "../../hooks";
+import { useParams, useNavigate } from 'react-router-dom';
 
 export default function SnapshotPage() {
   const [snapshot, setSnapshot] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
+  const navigate = useNavigate();
+  const fetch = useAuthenticatedFetch();
 
   const {
     refetch: refetchSnapshots,
@@ -22,24 +24,41 @@ export default function SnapshotPage() {
     },
   });
 
+  const handleDelete = async () => {
+    setIsLoading(true);
+    const response = await fetch("/api/snapshots/" + id, { method: "DELETE" });
+
+    if (response.ok) {
+      navigate("/snapshots");
+    } else {
+      setIsLoading(false);
+    }
+  }
+
   return (
     <Page>
-      <TitleBar title={"Snapshot"} />
+      <TitleBar
+        title={"Snapshot"}
+        primaryAction={{
+          content: "Delete",
+          onAction: handleDelete,
+          destructive: true
+        }}
+      />
       <Layout>
         <Layout.Section>
-          <Card sectioned>
-            {isLoading ? (
-              <SkeletonBodyText />
-            ) : (
-              <>
-              <Text variant="headingMd" as="h2">
-                {snapshot.name}
-              </Text>
-
+          {isLoading ? (
+            <SkeletonBodyText />
+          ) : (
+            <>
+              <Card sectioned>
+                <Text variant="headingMd" as="h2">
+                  {snapshot.name}
+                </Text>
+              </Card>
               <ProductsList products={snapshot.products} isLoading={isLoading} />
-              </>
-            )}
-          </Card>
+            </>
+          )}
         </Layout.Section>
       </Layout>
     </Page>

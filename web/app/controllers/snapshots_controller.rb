@@ -37,12 +37,11 @@ class SnapshotsController < AuthenticatedController
 
   # DELETE /snapshots/1 or /snapshots/1.json
   def destroy
-    @snapshot.destroy
+    @snapshot = current_shop.snapshots.find_by_id(params[:id])
 
-    respond_to do |format|
-      format.html { redirect_to snapshots_url, notice: "Snapshot was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    @snapshot.destroy!
+
+    head :no_content
   end
 
   private
@@ -64,11 +63,6 @@ class SnapshotsController < AuthenticatedController
         data: product.to_json
       }
     end
-  end
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_snapshot
-    @snapshot = Snapshot.find(params[:id])
   end
 
   # Only allow a list of trusted parameters through.
