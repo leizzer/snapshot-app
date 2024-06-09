@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :snapshots, defaults: {format: :json}
   root to: "home#index"
 
   mount ShopifyApp::Engine, at: "/api"

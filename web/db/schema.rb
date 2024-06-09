@@ -10,7 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_09_125631) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_08_223927) do
+  create_table "products", force: :cascade do |t|
+    t.integer "snapshot_id", null: false
+    t.string "shopify_product_id", null: false
+    t.string "title", null: false
+    t.string "vendor"
+    t.string "product_type"
+    t.string "staus"
+    t.string "handle"
+    t.json "data", null: false
+    t.datetime "published_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["snapshot_id"], name: "index_products_on_snapshot_id"
+  end
+
   create_table "shops", force: :cascade do |t|
     t.string "shopify_domain", null: false
     t.string "shopify_token", null: false
@@ -20,4 +35,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_125631) do
     t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
   end
 
+  create_table "snapshots", force: :cascade do |t|
+    t.integer "shop_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.index ["shop_id"], name: "index_snapshots_on_shop_id"
+  end
+
+  add_foreign_key "products", "snapshots"
+  add_foreign_key "snapshots", "shops"
 end
