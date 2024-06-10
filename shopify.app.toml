@@ -3,7 +3,7 @@
 client_id = "19bdea8aab3f3a8e1a7931a5e0de3af1"
 name = "snapshot-app"
 handle = "snapshot-app"
-application_url = "https://widely-clan-temple-contributions.trycloudflare.com"
+application_url = "https://cure-benefit-hampton-enrollment.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://widely-clan-temple-contributions.trycloudflare.com/auth/callback",
-  "https://widely-clan-temple-contributions.trycloudflare.com/auth/shopify/callback",
-  "https://widely-clan-temple-contributions.trycloudflare.com/api/auth/callback"
+  "https://cure-benefit-hampton-enrollment.trycloudflare.com/auth/callback",
+  "https://cure-benefit-hampton-enrollment.trycloudflare.com/auth/shopify/callback",
+  "https://cure-benefit-hampton-enrollment.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

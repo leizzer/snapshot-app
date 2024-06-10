@@ -3,7 +3,7 @@ import { ProductsList } from "../components";
 import { Card, Page, Layout, SkeletonBodyText, Text, Button } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 import { useAppQuery, useAuthenticatedFetch } from "../hooks";
-import { Form, FormLayout, Checkbox, TextField } from '@shopify/polaris';
+import { Form, FormLayout, TextField } from '@shopify/polaris';
 
 export default function NewSnapshotPage() {
   const [snapshot, setSnapshot] = useState({ name: "", products: [] });
@@ -44,14 +44,7 @@ export default function NewSnapshotPage() {
 
   return (
     <Page>
-      <TitleBar
-        title={"New Snapshot"}
-        primaryAction={{
-          content: "Cancel",
-          onAction: () => console.log("Primary action"),
-          destructive: true
-        }}
-      />
+      <TitleBar title={"New Snapshot"} />
       <Layout>
         <Layout.Section>
           <Card sectioned>

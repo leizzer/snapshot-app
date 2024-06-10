@@ -44,6 +44,15 @@ class SnapshotsController < AuthenticatedController
     head :no_content
   end
 
+  def restore
+    SnapshotRestorer.call(
+      product_ids: restore_params[:product_ids],
+      snapshot: current_shop.snapshots.find_by_id(params[:id])
+    )
+
+    head :no_content
+  end
+
   private
 
   def shopify_products
@@ -69,4 +78,9 @@ class SnapshotsController < AuthenticatedController
   def snapshot_params
     params.require(:data).permit(:name)
   end
+
+  def restore_params
+    params.require(:data).permit(product_ids: [])
+  end
+
 end
