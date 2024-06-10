@@ -89,8 +89,8 @@ def add_privacy_webhooks
   ]
 
   ShopifyApp.configuration.webhooks = if ShopifyApp.configuration.has_webhooks?
-    ShopifyApp.configuration.webhooks.concat(privacy_webhooks)
-  else
-    privacy_webhooks
-  end
+                                        ShopifyApp.configuration.webhooks.concat(privacy_webhooks)
+                                      else
+                                        privacy_webhooks
+                                      end
 end

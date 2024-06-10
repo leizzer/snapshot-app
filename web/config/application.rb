@@ -8,6 +8,7 @@ require "rails/all"
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+# rubocop:disable Layout/LineLength
 module ShopifyAppTemplateRuby
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
@@ -17,10 +18,10 @@ module ShopifyAppTemplateRuby
 
     if ShopifyAPI::Context.embedded?
       config.action_dispatch.default_headers = config.action_dispatch.default_headers.merge({
-        "Access-Control-Allow-Origin" => "*",
-        "Access-Control-Allow-Headers" => "Authorization",
-        "Access-Control-Expose-Headers" => "X-Shopify-API-Request-Failure-Reauthorize-Url",
-      })
+                                                                                              "Access-Control-Allow-Origin" => "*",
+                                                                                              "Access-Control-Allow-Headers" => "Authorization",
+                                                                                              "Access-Control-Expose-Headers" => "X-Shopify-API-Request-Failure-Reauthorize-Url",
+                                                                                            })
     end
 
     # Configuration for the application, engines, and railties goes here.
@@ -32,3 +33,4 @@ module ShopifyAppTemplateRuby
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
+# rubocop:enable Layout/LineLength

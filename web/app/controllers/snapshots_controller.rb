@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-#
+
 class SnapshotsController < AuthenticatedController
   # GET /snapshots or /snapshots.json
   def index
@@ -9,8 +9,8 @@ class SnapshotsController < AuthenticatedController
   # GET /snapshots/1 or /snapshots/1.json
   def show
     @snapshot = current_shop.snapshots
-      .includes(:products)
-      .find_by_id(params[:id])
+                            .includes(:products)
+                            .find_by_id(params[:id])
   end
 
   # GET /snapshots/new
@@ -82,5 +82,4 @@ class SnapshotsController < AuthenticatedController
   def restore_params
     params.require(:data).permit(product_ids: [])
   end
-
 end

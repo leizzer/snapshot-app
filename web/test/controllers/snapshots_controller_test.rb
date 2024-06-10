@@ -1,6 +1,5 @@
 require "test_helper"
 
-
 class SnapshotsControllerTest < ActionDispatch::IntegrationTest
   include ShopifyApp::TestHelpers::ShopifySessionHelper
 
@@ -11,19 +10,18 @@ class SnapshotsControllerTest < ActionDispatch::IntegrationTest
       shop_domain: shop_domain
     )
 
-
     get snapshots_url
 
     @snapshot1 = snapshots(:one)
     @snapshot2 = snapshots(:two)
 
     assert_equal parsed_body,
-      {
-        "data" => [
-          hashed(@snapshot1),
-          hashed(@snapshot2)
-        ]
-      }
+                 {
+                   "data" => [
+                     hashed(@snapshot1),
+                     hashed(@snapshot2)
+                   ]
+                 }
 
     assert_response :success
   end
@@ -36,7 +34,7 @@ class SnapshotsControllerTest < ActionDispatch::IntegrationTest
   test "should create snapshot" do
     login
     assert_difference("Snapshot.count") do
-      post snapshots_url, params: { snapshot: {  } }
+      post snapshots_url, params: { snapshot: {} }
     end
 
     assert_redirected_to snapshot_url(Snapshot.last)
@@ -53,7 +51,7 @@ class SnapshotsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update snapshot" do
-    patch snapshot_url(@snapshot), params: { snapshot: {  } }
+    patch snapshot_url(@snapshot), params: { snapshot: {} }
     assert_redirected_to snapshot_url(@snapshot)
   end
 
