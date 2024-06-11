@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_08_223927) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_11_014128) do
   create_table "products", force: :cascade do |t|
     t.integer "snapshot_id", null: false
     t.string "shopify_product_id", null: false
@@ -24,6 +24,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_08_223927) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["snapshot_id"], name: "index_products_on_snapshot_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer "shop_id", null: false
+    t.integer "recurring", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_schedules_on_shop_id"
   end
 
   create_table "shops", force: :cascade do |t|
@@ -40,9 +48,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_08_223927) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "automatic", default: false
     t.index ["shop_id"], name: "index_snapshots_on_shop_id"
   end
 
   add_foreign_key "products", "snapshots"
+  add_foreign_key "schedules", "shops"
   add_foreign_key "snapshots", "shops"
 end

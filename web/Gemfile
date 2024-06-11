@@ -80,3 +80,5 @@ group :test do
 end
 
 gem "shopify_app", "~> 22.2"
+gem "sidekiq"
+gem "sidekiq-scheduler"

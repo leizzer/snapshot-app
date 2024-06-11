@@ -1,37 +1,23 @@
 import { useState } from "react";
-import { Card, TextContainer, Text } from "@shopify/polaris";
-import { useAppQuery, useAuthenticatedFetch } from "../hooks";
+import { Card, Text, ResourceList, ResourceItem, SkeletonBodyText } from "@shopify/polaris";
+import { useAppQuery } from "../hooks";
 import { useLinkClickHandler } from "react-router-dom";
 
 export function SnapshotsList() {
+  const [snapshots, setSnapshots] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const fetch = useAuthenticatedFetch();
   const handleNewSnapshotClick = useLinkClickHandler("/new_snapshot");
 
-  const {
-    data,
-    refetch: refetchList,
-    isLoading: isLoadingList,
-    isRefetching: isRefetchingList,
-  } = useAppQuery({
+
+  useAppQuery({
     url: "/api/snapshots",
     reactQueryOptions: {
-      onSuccess: () => {
+      onSuccess: (data) => {
         setIsLoading(false);
+        setSnapshots(data.data);
       },
     },
   });
-
-  const handleNewSnapshot = async () => {
-    setIsLoading(true);
-    const response = await fetch("/api/snapshots/new", {method: "GET"});
-
-    if (response.ok) {
-      await refetchProductCount();
-    } else {
-      setIsLoading(false);
-    }
-  };
 
   return (
     <Card
@@ -42,15 +28,28 @@ export function SnapshotsList() {
         onAction: handleNewSnapshotClick,
       }}
     >
-      <TextContainer>
-        <Text>
-          {isLoading
-            ? "Loading..."
-            : data?.length
-            ? `You have ${data.length} snapshots.`
-            : "You have no snapshots."}
-        </Text>
-      </TextContainer>
+      <Card sectioned>
+        {isLoading ? (
+          <SkeletonBodyText />
+        ) : (
+          <ResourceList
+            resourceName={{ singular: "snapshot", plural: "snapshots" }}
+            items={snapshots}
+            renderItem={(snapshot) => {
+              return (
+                <ResourceItem
+                  id={snapshot.id}
+                  url={`/snapshots/${snapshot.id}`}
+                >
+                  <Text variant="bodyMd" fontWeight="bold" as="h3">
+                    {snapshot.name}
+                  </Text>
+                </ResourceItem>
+              );
+            }}
+          />
+        )}
+      </Card>
     </Card>
   );
 }

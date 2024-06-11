@@ -54,7 +54,7 @@ export function ProductsCard() {
     <>
       {toastMarkup}
       <Card
-        title={t("ProductsCard.title")}
+        title={"Products Generator for testing"}
         sectioned
         primaryFooterAction={{
           content: t("ProductsCard.populateProductsButton", {
@@ -65,7 +65,6 @@ export function ProductsCard() {
         }}
       >
         <TextContainer spacing="loose">
-          <p>{t("ProductsCard.description")}</p>
           <Text as="h4" variant="headingMd">
             {t("ProductsCard.totalProductsHeading")}
             <Text variant="bodyMd" as="p" fontWeight="semibold">
