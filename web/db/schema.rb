@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_11_014128) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_12_011931) do
   create_table "products", force: :cascade do |t|
     t.integer "snapshot_id", null: false
     t.string "shopify_product_id", null: false
@@ -23,6 +23,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_11_014128) do
     t.datetime "shopify_created_at", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "thumbnail_url"
     t.index ["snapshot_id"], name: "index_products_on_snapshot_id"
   end
 

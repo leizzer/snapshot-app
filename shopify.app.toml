@@ -3,7 +3,7 @@
 client_id = "19bdea8aab3f3a8e1a7931a5e0de3af1"
 name = "snapshot-app"
 handle = "snapshot-app"
-application_url = "https://ef-backing-encouraged-linked.trycloudflare.com"
+application_url = "https://agencies-something-ear-berlin.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://ef-backing-encouraged-linked.trycloudflare.com/auth/callback",
-  "https://ef-backing-encouraged-linked.trycloudflare.com/auth/shopify/callback",
-  "https://ef-backing-encouraged-linked.trycloudflare.com/api/auth/callback"
+  "https://agencies-something-ear-berlin.trycloudflare.com/auth/callback",
+  "https://agencies-something-ear-berlin.trycloudflare.com/auth/shopify/callback",
+  "https://agencies-something-ear-berlin.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]

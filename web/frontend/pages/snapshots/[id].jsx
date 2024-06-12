@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { ProductsList } from "../../components";
 import { Card, Page, Layout, SkeletonBodyText, Text, Spinner } from '@shopify/polaris';
 import { TitleBar } from "@shopify/app-bridge-react";
@@ -9,13 +9,12 @@ export default function SnapshotPage() {
   const [snapshot, setSnapshot] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isRestoring, setIsRestoring] = useState(false);
+  const [selectedProducts, setSelectedProducts] = useState([]);
   const { id } = useParams();
   const navigate = useNavigate();
   const fetch = useAuthenticatedFetch();
 
-  const {
-    refetch: refetchSnapshots,
-  } = useAppQuery({
+  useAppQuery({
     url: "/api/snapshots/" + id,
     reactQueryOptions: {
       onSuccess: (data) => {
@@ -24,6 +23,15 @@ export default function SnapshotPage() {
       },
     },
   });
+
+  const productIDsFromSelect = () => (
+    snapshot.products.reduce((ids, product) => {
+      if (selectedProducts.includes(product.shopify_product_id)) {
+        ids.push(product.id)
+      }
+      return ids
+    }, [])
+  );
 
   const handleDelete = async () => {
     setIsLoading(true);
@@ -36,11 +44,15 @@ export default function SnapshotPage() {
     }
   }
 
-  const handleRestore = async (ids) => {
+  const handleRestore = async () => {
     setIsRestoring(true);
     const response = await fetch("/api/snapshots/" + id + "/restore", {
       method: "POST",
-      body: JSON.stringify({ data: { product_ids: ids } }),
+      body: JSON.stringify({
+        data: {
+          product_ids: productIDsFromSelect()
+        }
+      }),
     });
 
     if (response.ok) {
@@ -49,6 +61,11 @@ export default function SnapshotPage() {
       setIsRestoring(false);
     }
   };
+
+  const handleSelection = useCallback(
+    setSelectedProducts,
+    []
+  );
 
   return (
     <Page>
@@ -63,9 +80,7 @@ export default function SnapshotPage() {
         secondaryActions={[
           {
             content: "Restore",
-            onAction: () => handleRestore(
-              snapshot.products.map((product) => product.id)
-            ),
+            onAction: handleRestore,
             disabled: isRestoring
           },
         ]}
@@ -82,7 +97,12 @@ export default function SnapshotPage() {
                   {isRestoring ? <Spinner size="small" /> : null}
                 </Text>
               </Card>
-              <ProductsList products={snapshot.products} isLoading={isLoading} />
+              <ProductsList
+                products={snapshot.products}
+                isLoading={isLoading}
+                selectedProducts={selectedProducts}
+                setSelectedProducts={handleSelection}
+              />
             </>
           )}
         </Layout.Section>

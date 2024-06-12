@@ -1,18 +1,19 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { ProductsList } from "../components";
 import { Card, Page, Layout, SkeletonBodyText, Text, Button } from "@shopify/polaris";
 import { TitleBar } from "@shopify/app-bridge-react";
 import { useAppQuery, useAuthenticatedFetch } from "../hooks";
 import { Form, FormLayout, TextField } from '@shopify/polaris';
+import { useNavigate } from "react-router-dom";
 
 export default function NewSnapshotPage() {
   const [snapshot, setSnapshot] = useState({ name: "", products: [] });
+  const [selectedProducts, setSelectedProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const fetch = useAuthenticatedFetch();
+  const navigate = useNavigate();
 
-  const {
-    refetch: refetchSnapshot,
-  } = useAppQuery({
+  useAppQuery({
     url: "/api/snapshots/new",
     reactQueryOptions: {
       onSuccess: (data) => {
@@ -27,11 +28,20 @@ export default function NewSnapshotPage() {
 
     const response = await fetch("/api/snapshots", {
       method: "POST",
-      body: JSON.stringify({data: {name: snapshot.name}})
-    });
+      body: JSON.stringify(
+        {
+          data: {
+            name: snapshot.name,
+            product_ids: selectedProducts
+          }
+        }
+      )
+    })
 
     if (response.ok) {
-      await refetchSnapshot();
+      const { data } = await response.json()
+      navigate(`/snapshots/${data.id}`)
+      setIsLoading(false);
     } else {
       setIsLoading(false);
     }
@@ -41,6 +51,10 @@ export default function NewSnapshotPage() {
     setSnapshot({ ...snapshot, [key]: value });
   };
 
+  const handleSelection = useCallback(
+    setSelectedProducts,
+    []
+  );
 
   return (
     <Page>
@@ -72,7 +86,12 @@ export default function NewSnapshotPage() {
             )}
           </Card>
 
-          <ProductsList products={snapshot.products} isLoading={isLoading} />
+          <ProductsList
+            products={snapshot.products}
+            isLoading={isLoading}
+            selectedProducts={selectedProducts}
+            setSelectedProducts={handleSelection}
+          />
         </Layout.Section>
       </Layout>
     </Page>

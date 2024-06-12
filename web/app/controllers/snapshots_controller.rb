@@ -25,11 +25,11 @@ class SnapshotsController < AuthenticatedController
   def create
     @snapshot = current_shop.snapshots.new(
       name: snapshot_params[:name],
-      products_attributes: parsed_shopify_products
+      products_attributes: parsed_shopify_products(snapshot_params[:product_ids])
     )
 
     if @snapshot.save
-      @snapshot
+      render :show
     else
       render json: @snapshot.errors, status: :unprocessable_entity
     end
@@ -55,19 +55,19 @@ class SnapshotsController < AuthenticatedController
 
   private
 
-  def shopify_products
-    ShopifyAPI::Product.all
+  def shopify_products(ids=[])
+    ShopifyAPI::Product.all(ids: ids.join(","))
   end
 
-  def parsed_shopify_products
-    shopify_products.map do |product|
+  def parsed_shopify_products(ids=[])
+    shopify_products(ids).map do |product|
       Product.attributes_from_shopify_product(product)
     end
   end
 
   # Only allow a list of trusted parameters through.
   def snapshot_params
-    params.require(:data).permit(:name)
+    params.require(:data).permit(:name, product_ids: [])
   end
 
   def restore_params

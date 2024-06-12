@@ -20,6 +20,7 @@ class Product < ApplicationRecord
       product_type: product.product_type,
       status: product.status,
       handle: product.handle,
+      thumbnail_url: product.images&.first&.src,
       data: product.to_json
     }
   end
