@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import {
   Layout,
   Select
@@ -33,10 +33,10 @@ export function ScheduleNew({ schedule }) {
   };
 
   const options = [
-    {label: "Disabled", value: "disabled"},
-    {label: "Daily", value: "daily"},
-    {label: "Weekly", value: "weekly"},
-    {label: "Monthly", value: "monthly"}
+    { label: "Disabled", value: "disabled" },
+    { label: "Daily", value: "daily" },
+    { label: "Weekly", value: "weekly" },
+    { label: "Monthly", value: "monthly" }
   ];
 
   return (

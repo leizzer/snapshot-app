@@ -41,7 +41,7 @@ export default function HomePage() {
                     <Text as="h2" variant="headingMd">
                       Schedule for Snapshots
                     </Text>
-                    <ScheduleNew schedule={schedule}/>
+                    <ScheduleNew schedule={schedule} />
                   </>
                 )}
               </TextContainer>

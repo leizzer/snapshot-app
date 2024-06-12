@@ -32,7 +32,7 @@ export function ProductsCard() {
 
   const handlePopulate = async () => {
     setIsLoading(true);
-    const response = await fetch("/api/products", {method: "POST"});
+    const response = await fetch("/api/products", { method: "POST" });
 
     if (response.ok) {
       await refetchProductCount();
