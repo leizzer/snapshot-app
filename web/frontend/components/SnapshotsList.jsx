@@ -8,7 +8,6 @@ export function SnapshotsList() {
   const [isLoading, setIsLoading] = useState(true);
   const handleNewSnapshotClick = useLinkClickHandler("/new_snapshot");
 
-
   useAppQuery({
     url: "/api/snapshots",
     reactQueryOptions: {
@@ -44,6 +43,9 @@ export function SnapshotsList() {
                   <Text variant="bodyMd" fontWeight="bold" as="h3">
                     {snapshot.name}
                   </Text>
+                  <div>
+                    <p>Products: {snapshot.products_count}</p>
+                  </div>
                 </ResourceItem>
               );
             }}

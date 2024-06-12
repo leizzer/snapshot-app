@@ -1,9 +1,9 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "19bdea8aab3f3a8e1a7931a5e0de3af1"
-name = "snapshot-app"
+name = "SnapshotApp"
 handle = "snapshot-app"
-application_url = "https://relates-solve-auditor-rip.trycloudflare.com"
+application_url = "https://aquarium-full-hose-cabinets.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://relates-solve-auditor-rip.trycloudflare.com/auth/callback",
-  "https://relates-solve-auditor-rip.trycloudflare.com/auth/shopify/callback",
-  "https://relates-solve-auditor-rip.trycloudflare.com/api/auth/callback"
+  "https://aquarium-full-hose-cabinets.trycloudflare.com/auth/callback",
+  "https://aquarium-full-hose-cabinets.trycloudflare.com/auth/shopify/callback",
+  "https://aquarium-full-hose-cabinets.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
