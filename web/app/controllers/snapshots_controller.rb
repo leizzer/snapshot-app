@@ -55,11 +55,11 @@ class SnapshotsController < AuthenticatedController
 
   private
 
-  def shopify_products(ids=[])
-    ShopifyAPI::Product.all(ids: ids.join(","))
+  def shopify_products(ids = [])
+    ShopifyAPI::Product.all(ids: ids.join(','))
   end
 
-  def parsed_shopify_products(ids=[])
+  def parsed_shopify_products(ids = [])
     shopify_products(ids).map do |product|
       Product.attributes_from_shopify_product(product)
     end

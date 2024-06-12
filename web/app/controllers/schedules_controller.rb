@@ -35,5 +35,4 @@ class SchedulesController < AuthenticatedController
   def schedule_params
     params.require(:data).permit(:recurring)
   end
-
 end
