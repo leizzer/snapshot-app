@@ -7,7 +7,7 @@ class SnapshotJob < ApplicationJob
     shop.with_shopify_session do |session|
       @shopify_products = shopify_products_for(session)
 
-      @snapshot = current_shop.snapshots.new(
+      @snapshot = shop.snapshots.new(
         name: "Scheduled - #{DateTime.now.to_s}",
         automatic: true,
         products_attributes: parsed_shopify_products
@@ -23,7 +23,7 @@ class SnapshotJob < ApplicationJob
 
   def parsed_shopify_products
     @shopify_products.map do |product|
-      Product.attributes_from_shopify(product)
+      Product.attributes_from_shopify_product(product)
     end
   end
 end

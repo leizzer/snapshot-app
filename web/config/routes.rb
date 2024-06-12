@@ -11,6 +11,15 @@ Rails.application.routes.draw do
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
+  #########################################
+  #TODO: This should be behind Admin check
+  require "sidekiq/web"
+  require 'sidekiq-scheduler/web'
+  Rails.application.routes.draw do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+  #########################################
+
   scope path: :api, format: :json do
     resource :schedule, only: [:show, :create, :update, :destroy]
     resources :snapshots, except: [:edit, :update] do
