@@ -5,7 +5,7 @@ This app make use of the [ShopifyApp Template for Ruby](https://github.com/Shopi
 
 This README file contains portions from ShopifyApp Template Ruby's README file.
 
-## Herited stack
+## Inherited stack
 
 The Ruby app template comes with the following out-of-the-box functionality:
 
