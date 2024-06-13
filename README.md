@@ -1,7 +1,7 @@
 # Snapshot App
 
 ## Disclaimer
-This app makes use of the [ShopifyApp Template for Ruby](https://github.com/Shopify/shopify-app-template-ruby), in their repository you will find more information about how it works and its features.
+This app uses [ShopifyApp Template for Ruby](https://github.com/Shopify/shopify-app-template-ruby), in their repository you will find more information about how it works and its features.
 
 This README file contains portions from ShopifyApp Template Ruby's README file.
 
