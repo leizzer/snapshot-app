@@ -10,7 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_22_200143) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_12_011931) do
+  create_table "products", force: :cascade do |t|
+    t.integer "snapshot_id", null: false
+    t.string "shopify_product_id", null: false
+    t.string "title", null: false
+    t.string "vendor"
+    t.string "product_type"
+    t.string "status"
+    t.string "handle"
+    t.json "data", null: false
+    t.datetime "shopify_created_at", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "thumbnail_url"
+    t.index ["snapshot_id"], name: "index_products_on_snapshot_id"
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer "shop_id", null: false
+    t.integer "recurring", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_schedules_on_shop_id"
+  end
+
   create_table "shops", force: :cascade do |t|
     t.string "shopify_domain", null: false
     t.string "shopify_token", null: false
@@ -20,14 +44,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_22_200143) do
     t.index ["shopify_domain"], name: "index_shops_on_shopify_domain", unique: true
   end
 
-  create_table "users", force: :cascade do |t|
-    t.bigint "shopify_user_id", null: false
-    t.string "shopify_domain", null: false
-    t.string "shopify_token", null: false
+  create_table "snapshots", force: :cascade do |t|
+    t.integer "shop_id", null: false
+    t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "access_scopes"
-    t.index ["shopify_user_id"], name: "index_users_on_shopify_user_id", unique: true
+    t.boolean "automatic", default: false
+    t.index ["shop_id"], name: "index_snapshots_on_shop_id"
   end
 
+  add_foreign_key "products", "snapshots"
+  add_foreign_key "schedules", "shops"
+  add_foreign_key "snapshots", "shops"
 end

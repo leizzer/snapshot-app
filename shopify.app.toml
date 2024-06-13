@@ -1,12 +1,14 @@
 # Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
 
 client_id = "19bdea8aab3f3a8e1a7931a5e0de3af1"
-name = "snapshot-app"
+name = "SnapshotApp"
 handle = "snapshot-app"
-application_url = "https://example.com/"
+application_url = "https://breathing-occupations-computational-existing.trycloudflare.com"
 embedded = true
 
 [build]
+automatically_update_urls_on_dev = true
+dev_store_url = "quickstart-172ba9c2.myshopify.com"
 include_config_on_deploy = true
 
 [access_scopes]
@@ -14,7 +16,11 @@ include_config_on_deploy = true
 scopes = "write_products"
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [
+  "https://breathing-occupations-computational-existing.trycloudflare.com/auth/callback",
+  "https://breathing-occupations-computational-existing.trycloudflare.com/auth/shopify/callback",
+  "https://breathing-occupations-computational-existing.trycloudflare.com/api/auth/callback"
+]
 
 [webhooks]
 api_version = "2024-04"

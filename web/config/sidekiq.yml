@@ -1,0 +1,29 @@
+:concurrency: 3
+:timeout: 60
+:verbose: true
+:queues:
+  - critical
+  - default
+  - mailers
+  - scheduler
+
+:scheduler:
+  :schedule:
+    DailySnapshots:
+      cron: "0 0 * * *"
+      class: "SnapshotQueuerJob"
+      queue: scheduler
+      args: ['daily']
+      description: "Every day at 00:00"
+    WeeklySnapshots:
+      cron: "0 22 * * 6"
+      class: "SnapshotQueuerJob"
+      queue: scheduler
+      args: ['weekly']
+      description: "Every Saturday at 23:00"
+    MonthlySnapshots:
+      cron: "0 0 1 * *"
+      class: "SnapshotQueuerJob"
+      queue: scheduler
+      args: ['monthly']
+      description: "Every 1st of the month at 00:00"

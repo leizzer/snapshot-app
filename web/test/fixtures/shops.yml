@@ -1,0 +1,7 @@
+one:
+  shopify_domain: hugos-shop
+  shopify_token: 1234567890abcdef
+
+two:
+  shopify_domain: bobs-shop
+  shopify_token: 1234567890abcdef
