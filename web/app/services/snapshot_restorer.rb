@@ -17,8 +17,15 @@ class SnapshotRestorer < ApplicationService
 
   def restore(product)
     data = JSON.parse(product.data)
-    shopify_product = ShopifyAPI::Product.new(from_hash: data)
-    shopify_product.save!
+
+    begin
+      shopify_product = ShopifyAPI::Product.new(from_hash: data)
+      shopify_product.save!
+    rescue ShopifyAPI::Errors::HttpResponseError => e
+      data.delete("id") # remove id to create a new product
+      shopify_product = ShopifyAPI::Product.new(from_hash: data)
+      shopify_product.save!
+    end
   end
 
   def products
