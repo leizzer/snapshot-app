@@ -10,7 +10,7 @@ https://shopify.dev/docs/api
 APIs and Tools: Tiene GraphQL, REST e incluso App Bridge para el Admin
 
 https://github.com/Shopify/shopify-app-template-ruby
-Shopify App Template random de una mina en Github. No lo clono porque no voy a poder defender nada si no lo hago yo.
+Shopify App Template for Ruby from Shopify
 
 -- End: 2024-06-03 22:28
 
