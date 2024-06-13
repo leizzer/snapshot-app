@@ -130,3 +130,6 @@ Is called by SidekiqScheduler, using the type that can be `daily`, `weekly` or `
 Called by `SnapshotQueuerJob` it perform the copy of the products from Shopify into the DB.
 
 
+# Changes over original template
+
+I've created a PR to capture the changes from my part [https://github.com/leizzer/snapshot-app/pull/1](https://github.com/leizzer/snapshot-app/pull/1)
