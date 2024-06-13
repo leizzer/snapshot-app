@@ -25,7 +25,7 @@ Visit [ShopifyApp Template for Ruby - Tech Stack](https://github.com/Shopify/sho
 These are gems and services added to the stack:
 
 - `dotenv` for running `rails console` with Shopify variables
-- `sidekiq` for as job runner engine
+- `sidekiq` as job runner engine
 - `sidekiq-scheduler` for scheduling jobs
 
 # Getting started
