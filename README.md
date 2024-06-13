@@ -1,7 +1,7 @@
 # Snapshot App
 
 ## Disclaimer
-This app make use of the [ShopifyApp Template for Ruby](https://github.com/Shopify/shopify-app-template-ruby), in their repository you will find more information about how it work and it's features.
+This app makes use of the [ShopifyApp Template for Ruby](https://github.com/Shopify/shopify-app-template-ruby), in their repository you will find more information about how it works and its features.
 
 This README file contains portions from ShopifyApp Template Ruby's README file.
 
@@ -52,7 +52,7 @@ These are gems and services added to the stack:
 10. It should start running all the services GraphQL, Frontend and Backend. Ports may change from run to run that is why it will provide a CloudFlare URL that will be updated automatically in Shopify toml file.
 11. At the bottom of the screen you should see the label `Preview URL`
 12. Follow the `Preview URL` link to install the app in your Shopify's shop. (tip: pin the app in your Shopify sidebar)
-13. In other terminal from inside the `web/` folder run `sidekiq` if you want to run the jobs locally.
+13. In another terminal from inside the `web/` folder run `sidekiq` if you want to run the jobs locally.
 
 ## Deployment
 
@@ -93,31 +93,29 @@ Snapshots is the face of the backed up products. It's a simple model that groups
 #### Controller
 
 It pretty much has the regular RESTful actions. It doesn't have edit/upgrade for reasons that I will discuss during our call.
-The action to highlight is the `restore` action that receives the `id` if the snapshot and the `product_ids` that the user wants to restore, with this information if will call the `SnapshotRestorer` service. The service tries to update current product on Shopify with the information saved in snapshot-app, if it fails it's probably because the product was deleted on Shopify so it tries to creates the product instead.
+The action to highlight is the `restore` action that receives the `id` of the snapshot and the `product_ids` that the user wants to restore, with this information it will call the `SnapshotRestorer` service. The service tries to update the current product on Shopify with the information saved in snapshot-app, if it fails it's probably because the product was deleted on Shopify so it tries to create the product instead.
 
 #### Frontend
 
 - Home page: List of snapshots in order of creation. There you can create a new snapshot manually.
-- New Snapshot page: For manually create a new snapshot. User can change the default name for the snapshot and select which products wants to back up.
+- New Snapshot page: For manually creating a new snapshot. User can change the default name for the snapshot and select which products wants to back up.
 - Restore Page: When the user clicks on a snapshot the app will present a page with all the products from that snapshot and user can select which products to restore.
 
 ### Schedules
 
 #### In Database / Model
 
-The field to highlight here is the `recurring` field that can ben `disabled`, `daily`, `weekly` or `monthly`. This model is used to know if the user wants to automatically create snapshots and with what frequency.
+The field to highlight here is the `recurring` field that can be `disabled`, `daily`, `weekly` or `monthly`. This model is used to know if the user wants to automatically create snapshots and with what frequency.
 
 A `Schedule` is created for each `Shop` after the shop is created.
 
 #### Controller
 
-Simple controller with for updating the `recurring` value.
+Simple controller for updating the `recurring` field.
 
 #### Frontend
 
-- Home page: List of snapshots in order of creation. There you can create a new snapshot manually.
-- New Snapshot page: For manually create a new snapshot. User can change the default name for the snapshot and select which products wants to back up.
-- Restore Page: When the user clicks on a snapshot the app will present a page with all the products from that snapshot and user can select which products to restore.
+- Home page: Small card for setting the `recurring` value from dropdown.
 
 ### Jobs
 
@@ -127,7 +125,7 @@ Is called by SidekiqScheduler, using the type that can be `daily`, `weekly` or `
 
 #### SnapshotJob
 
-Called by `SnapshotQueuerJob` it perform the copy of the products from Shopify into the DB.
+Called by `SnapshotQueuerJob` it performs the copy of the products from Shopify into the DB.
 
 
 # Changes over original template
