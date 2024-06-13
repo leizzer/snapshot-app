@@ -3,7 +3,7 @@
 client_id = "19bdea8aab3f3a8e1a7931a5e0de3af1"
 name = "SnapshotApp"
 handle = "snapshot-app"
-application_url = "https://aquarium-full-hose-cabinets.trycloudflare.com"
+application_url = "https://breathing-occupations-computational-existing.trycloudflare.com"
 embedded = true
 
 [build]
@@ -17,9 +17,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://aquarium-full-hose-cabinets.trycloudflare.com/auth/callback",
-  "https://aquarium-full-hose-cabinets.trycloudflare.com/auth/shopify/callback",
-  "https://aquarium-full-hose-cabinets.trycloudflare.com/api/auth/callback"
+  "https://breathing-occupations-computational-existing.trycloudflare.com/auth/callback",
+  "https://breathing-occupations-computational-existing.trycloudflare.com/auth/shopify/callback",
+  "https://breathing-occupations-computational-existing.trycloudflare.com/api/auth/callback"
 ]
 
 [webhooks]
